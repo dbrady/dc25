@@ -14,4 +14,10 @@ describe NullPiece do
       expect(piece.board).to eq board
     end
   end
+
+  describe "#to_s" do
+    it "renders piece as blank two-character string" do
+      expect(NullPiece.new.to_s).to eq "  "
+    end
+  end
 end

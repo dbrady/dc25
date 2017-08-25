@@ -35,10 +35,16 @@ describe Board do
 BOARD
       end
 
-      example "when a piece is present at a1"#  do
-      #   piece = Piece.new(
-      #   board.add_piece piece, "a1"
-      # end
+      example "when a white pawn is present at a1"  do
+        pawn = Piece.create "WP", "a1", board
+        expect(board.to_s).to eq <<BOARD
++--+--+
+|  |  |
++--+--+
+|WP|  |
++--+--+
+BOARD
+      end
     end
   end
 

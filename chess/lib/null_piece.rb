@@ -6,4 +6,12 @@ class NullPiece < Piece
   def initialize(location=nil, board=nil)
     @location, @board = location, board
   end
+
+  def to_s
+    "  "
+  end
+
+  def type_symbol
+    " "
+  end
 end

@@ -9,9 +9,9 @@ class Board
     @size = size
     @pieces = []
     @board = []
-    size.times do |rank|
+    1.upto(size) do |rank|
       @board[rank] = []
-      size.times do |file|
+      1.upto(size) do |file|
         @board[rank][file] = NullPiece.new
       end
     end
@@ -20,8 +20,8 @@ class Board
   def to_s
     output = []
     output << row_divider
-    size.times do |rank|
-      output << '|' + "  |" * size
+    size.downto(1) do |rank|
+      output << '|' + 1.upto(size).map {|file| board[rank][file].to_s + "|"}.join("")
       output << row_divider
     end
     output * "\n" + "\n"
