@@ -34,12 +34,17 @@ class Board
   def add_piece piece, location
     self.pieces << piece
     x,y = *translate_location_to_xy(location)
+    if !board[y][x].is_a? NullPiece
+      raise InvalidLocationError.new("cannot add piece '#{piece}' at '#{location}'; there is already a '#{board[y][x]}' there")
+    end
     board[y][x] = piece
   end
 
   def piece_at(location)
     x,y = *translate_location_to_xy(location)
     board[y][x]
+  rescue
+    NullPiece.new(location)
   end
 
   private

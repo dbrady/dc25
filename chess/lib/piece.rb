@@ -38,4 +38,53 @@ class Piece
   def type_symbol
     raise NotImplementedError.new("Child class must override Piece#type_symbol")
   end
+
+  def rank
+    location.split(//).last.to_i
+  end
+
+  def file
+    location.split(//).first
+  end
+
+  def square_ahead
+    "#{file}#{next_rank}"
+  end
+
+  def next_rank
+    if white?
+      rank + 1
+    else
+      rank - 1
+    end
+  end
+
+  def right_file
+    (file.ord + (white? ? 1 : -1)).chr
+  end
+
+  def left_file
+    (file.ord + (black? ? 1 : -1)).chr
+  end
+
+  def white?
+    color == WHITE
+  end
+
+  def black?
+    color == BLACK
+  end
+
+  def present?
+    true
+  end
+
+  def empty?
+    false
+  end
+
+  def enemy_of?(piece)
+    (white? && piece.black?) ||
+      (black? && piece.white?)
+  end
 end

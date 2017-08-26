@@ -14,4 +14,12 @@ class NullPiece < Piece
   def type_symbol
     " "
   end
+
+  def empty?
+    true
+  end
+
+  def present?
+    false
+  end
 end

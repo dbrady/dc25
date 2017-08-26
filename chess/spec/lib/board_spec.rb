@@ -49,7 +49,7 @@ BOARD
   end
 
   describe "#add_piece" do
-    let(:piece) { Piece.new(Piece::WHITE) }
+    let(:piece) { Piece.create("WP") }
 
     it "adds a piece to the board" do
       expect {
@@ -63,7 +63,14 @@ BOARD
     end
 
     context "when there is already a piece on the board" do
-      it "raises a BoardError"
+      let(:piece2) { Piece.create("BP") }
+
+      it "raises an InvalidLocationError" do
+        board.add_piece piece, "a1"
+        expect {
+          board.add_piece piece2, "a1"
+        }.to raise_error InvalidLocationError
+      end
     end
   end
 
@@ -81,13 +88,15 @@ BOARD
     end
 
     context "when there is no piece on that square" do
-      it "returns a NullPiece"
+      it "returns a NullPiece" do
+        expect(board.piece_at("a2")).to be_a NullPiece
+      end
     end
 
     context "when that square on out of bounds" do
-      it "returns a NullPiece"
+      it "returns a NullPiece" do
+        expect(board.piece_at("j9")).to be_a NullPiece
+      end
     end
   end
-
-
 end
